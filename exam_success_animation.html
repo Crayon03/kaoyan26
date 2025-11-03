@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>26考研上岸 - 复旦大学</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a0a;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+            position: relative;
+        }
+        
+        /* 动态背景网格 */
+        .grid {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(139, 0, 0, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(139, 0, 0, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* 光晕效果 */
+        .glow-orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.4;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .orb1 {
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(139, 0, 0, 0.6), transparent);
+            top: -10%;
+            left: -10%;
+            animation-delay: 0s;
+        }
+        
+        .orb2 {
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(200, 16, 46, 0.5), transparent);
+            bottom: -10%;
+            right: -10%;
+            animation-delay: -10s;
+        }
+        
+        .orb3 {
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, rgba(220, 38, 38, 0.4), transparent);
+            top: 50%;
+            left: 50%;
+            animation-delay: -5s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(50px, -50px) scale(1.1); }
+            66% { transform: translate(-50px, 50px) scale(0.9); }
+        }
+        
+        /* 主容器 */
+        .container {
+            position: relative;
+            z-index: 10;
+            text-align: center;
+            padding: 80px 100px;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            border: 1px solid rgba(139, 0, 0, 0.3);
+            box-shadow: 
+                0 20px 60px rgba(0, 0, 0, 0.5),
+                inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            animation: containerFadeIn 1.2s ease-out;
+        }
+        
+        @keyframes containerFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+        
+        /* 年份标签 */
+        .year-badge {
+            display: inline-block;
+            padding: 8px 24px;
+            background: linear-gradient(135deg, rgba(139, 0, 0, 0.2), rgba(220, 38, 38, 0.2));
+            border: 1px solid rgba(139, 0, 0, 0.4);
+            border-radius: 20px;
+            color: rgba(220, 38, 38, 0.9);
+            font-size: 16px;
+            font-weight: 600;
+            letter-spacing: 3px;
+            margin-bottom: 40px;
+            animation: badgeFadeIn 0.8s ease-out 0.3s both;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .year-badge::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            animation: badgeShine 3s ease-in-out infinite;
+        }
+        
+        @keyframes badgeShine {
+            0% { left: -100%; }
+            50%, 100% { left: 100%; }
+        }
+        
+        @keyframes badgeFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 主标题 */
+        .main-title {
+            font-size: 96px;
+            font-weight: 700;
+            letter-spacing: 8px;
+            margin: 30px 0;
+            background: linear-gradient(135deg, #ffffff 0%, #8b0000 50%, #dc2626 100%);
+            background-size: 200% 200%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGradient 4s ease infinite, titleFadeIn 1s ease-out 0.5s both;
+            position: relative;
+            filter: drop-shadow(0 0 20px rgba(139, 0, 0, 0.3));
+        }
+        
+        .main-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8b0000, transparent);
+            animation: underlineExpand 1.5s ease-out 1.5s both;
+        }
+        
+        @keyframes underlineExpand {
+            to {
+                width: 100%;
+            }
+        }
+        
+        @keyframes titleGradient {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+        
+        @keyframes titleFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 分割线 */
+        .divider {
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #8b0000, transparent);
+            margin: 40px auto;
+            animation: dividerExpand 1s ease-out 0.8s both;
+        }
+        
+        @keyframes dividerExpand {
+            from {
+                width: 0;
+                opacity: 0;
+            }
+            to {
+                width: 60px;
+                opacity: 1;
+            }
+        }
+        
+        /* 学校名称 */
+        .university {
+            font-size: 42px;
+            font-weight: 600;
+            color: #ffffff;
+            letter-spacing: 12px;
+            margin: 30px 0;
+            animation: universityFadeIn 1s ease-out 1s both;
+            text-shadow: 0 0 30px rgba(139, 0, 0, 0.5);
+            position: relative;
+        }
+        
+        .university::before,
+        .university::after {
+            content: '';
+            position: absolute;
+            width: 40px;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(139, 0, 0, 0.6));
+            top: 50%;
+        }
+        
+        .university::before {
+            left: -60px;
+        }
+        
+        .university::after {
+            right: -60px;
+            background: linear-gradient(90deg, rgba(139, 0, 0, 0.6), transparent);
+        }
+        
+        @keyframes universityFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(15px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 副标题 */
+        .subtitle {
+            font-size: 18px;
+            color: rgba(255, 255, 255, 0.6);
+            letter-spacing: 4px;
+            font-weight: 300;
+            margin-top: 30px;
+            animation: subtitleFadeIn 1s ease-out 1.2s both;
+        }
+        
+        @keyframes subtitleFadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* 粒子系统 */
+        .particle {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: rgba(139, 0, 0, 0.6);
+            border-radius: 50%;
+            pointer-events: none;
+        }
+        
+        /* 光线 */
+        .light-ray {
+            position: absolute;
+            width: 2px;
+            height: 150px;
+            background: linear-gradient(to bottom, rgba(139, 0, 0, 0.8), transparent);
+            top: -150px;
+            animation: rayFall linear infinite;
+        }
+        
+        @keyframes rayFall {
+            from {
+                transform: translateY(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+            }
+            to {
+                transform: translateY(100vh);
+                opacity: 0;
+            }
+        }
+        
+        /* 微光效果 */
+        @keyframes shimmer {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        /* 六边形装饰 */
+        .hexagon {
+            position: absolute;
+            width: 60px;
+            height: 35px;
+            background: rgba(139, 0, 0, 0.1);
+            border-left: 1px solid rgba(139, 0, 0, 0.2);
+            border-right: 1px solid rgba(139, 0, 0, 0.2);
+            animation: hexFloat 15s ease-in-out infinite;
+        }
+        
+        .hexagon::before,
+        .hexagon::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            left: 0;
+        }
+        
+        .hexagon::before {
+            bottom: 100%;
+            border-bottom: 17.5px solid rgba(139, 0, 0, 0.1);
+        }
+        
+        .hexagon::after {
+            top: 100%;
+            border-top: 17.5px solid rgba(139, 0, 0, 0.1);
+        }
+        
+        @keyframes hexFloat {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            33% { transform: translate(30px, -40px) rotate(120deg); }
+            66% { transform: translate(-30px, 40px) rotate(240deg); }
+        }
+        
+        /* 圆环装饰 */
+        .ring {
+            position: absolute;
+            border: 1px solid rgba(139, 0, 0, 0.2);
+            border-radius: 50%;
+            animation: ringPulse 4s ease-in-out infinite;
+        }
+        
+        @keyframes ringPulse {
+            0%, 100% { 
+                transform: scale(1) rotate(0deg);
+                opacity: 0.3;
+            }
+            50% { 
+                transform: scale(1.5) rotate(180deg);
+                opacity: 0.1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid"></div>
+    <div class="glow-orb orb1"></div>
+    <div class="glow-orb orb2"></div>
+    <div class="glow-orb orb3"></div>
+    
+    <div class="container">
+        <div class="year-badge">26 考研</div>
+        <div class="main-title">上岸</div>
+        <div class="divider"></div>
+        <div class="university">复旦大学</div>
+        <div class="subtitle">FUDAN UNIVERSITY</div>
+    </div>
+    
+    <script>
+        // 创建粒子系统
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            
+            const startX = Math.random() * window.innerWidth;
+            const startY = Math.random() * window.innerHeight;
+            const endX = startX + (Math.random() - 0.5) * 200;
+            const endY = startY - Math.random() * 300;
+            
+            particle.style.left = startX + 'px';
+            particle.style.top = startY + 'px';
+            
+            const duration = Math.random() * 3 + 2;
+            const delay = Math.random() * 2;
+            
+            particle.animate([
+                {
+                    transform: 'translate(0, 0) scale(1)',
+                    opacity: 0
+                },
+                {
+                    transform: `translate(${(endX - startX) * 0.3}px, ${(endY - startY) * 0.3}px) scale(1.5)`,
+                    opacity: 0.8,
+                    offset: 0.3
+                },
+                {
+                    transform: `translate(${endX - startX}px, ${endY - startY}px) scale(0.5)`,
+                    opacity: 0
+                }
+            ], {
+                duration: duration * 1000,
+                delay: delay * 1000,
+                easing: 'cubic-bezier(0.4, 0, 0.2, 1)'
+            });
+            
+            document.body.appendChild(particle);
+            setTimeout(() => particle.remove(), (duration + delay) * 1000);
+        }
+        
+        // 创建光线
+        function createLightRay() {
+            const ray = document.createElement('div');
+            ray.className = 'light-ray';
+            ray.style.left = Math.random() * window.innerWidth + 'px';
+            ray.style.animationDuration = (Math.random() * 3 + 3) + 's';
+            ray.style.animationDelay = Math.random() * 2 + 's';
+            document.body.appendChild(ray);
+            setTimeout(() => ray.remove(), 8000);
+        }
+        
+        // 创建闪烁星星
+        function createStar() {
+            const star = document.createElement('div');
+            star.style.position = 'absolute';
+            star.style.width = '3px';
+            star.style.height = '3px';
+            star.style.background = '#ffffff';
+            star.style.borderRadius = '50%';
+            star.style.left = Math.random() * window.innerWidth + 'px';
+            star.style.top = Math.random() * window.innerHeight + 'px';
+            star.style.animation = 'shimmer 2s ease-in-out infinite';
+            star.style.animationDelay = Math.random() * 2 + 's';
+            star.style.boxShadow = '0 0 4px rgba(255, 255, 255, 0.8)';
+            document.body.appendChild(star);
+        }
+        
+        // 持续生成效果
+        setInterval(createParticle, 150);
+        setInterval(createLightRay, 800);
+        
+        // 创建背景星星
+        for (let i = 0; i < 50; i++) {
+            setTimeout(createStar, i * 50);
+        }
+        
+        // 创建六边形装饰
+        function createHexagon() {
+            const hexagon = document.createElement('div');
+            hexagon.className = 'hexagon';
+            hexagon.style.left = Math.random() * window.innerWidth + 'px';
+            hexagon.style.top = Math.random() * window.innerHeight + 'px';
+            hexagon.style.animationDelay = Math.random() * 5 + 's';
+            hexagon.style.animationDuration = (Math.random() * 10 + 15) + 's';
+            document.body.appendChild(hexagon);
+        }
+        
+        for (let i = 0; i < 8; i++) {
+            createHexagon();
+        }
+        
+        // 创建圆环装饰
+        function createRing() {
+            const ring = document.createElement('div');
+            ring.className = 'ring';
+            const size = Math.random() * 200 + 100;
+            ring.style.width = size + 'px';
+            ring.style.height = size + 'px';
+            ring.style.left = Math.random() * window.innerWidth + 'px';
+            ring.style.top = Math.random() * window.innerHeight + 'px';
+            ring.style.animationDelay = Math.random() * 2 + 's';
+            ring.style.animationDuration = (Math.random() * 3 + 4) + 's';
+            document.body.appendChild(ring);
+        }
+        
+        for (let i = 0; i < 6; i++) {
+            createRing();
+        }
+        
+        // 初始粒子爆发
+        for (let i = 0; i < 30; i++) {
+            setTimeout(createParticle, i * 50);
+        }
+    </script>
+</body>
+</html>
